@@ -26,6 +26,10 @@ page() { # source.md  out-dir  title
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$title</title>
+<meta name="application-name" content="LLM for Sheets">
+<meta name="description" content="LLM for Sheets is a Google Sheets add-on that adds the =LLM() formula, so an AI model can answer a question directly inside a spreadsheet cell.">
+<meta property="og:site_name" content="LLM for Sheets">
+<meta property="og:title" content="LLM for Sheets">
 <link rel="icon" href="${prefix}assets/icon-128.png">
 <style>
   :root { --green:#059669; --dark:#047857; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; }
@@ -80,6 +84,8 @@ mkdir -p "$OUT/assets"
 cp assets/icon-128.png assets/screenshot-1.png "$OUT/assets/"
 cp google*.html "$OUT/" 2>/dev/null || true
 
-page index.md   ""        "LLM for Sheets — any LLM in a Google Sheets cell"
+# The title must read exactly as the OAuth consent screen app name: the
+# verification checker compares the two strings.
+page index.md   ""        "LLM for Sheets"
 page PRIVACY.md "privacy" "Privacy Policy — LLM for Sheets"
 page TERMS.md   "terms"   "Terms of Service — LLM for Sheets"
