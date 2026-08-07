@@ -81,8 +81,6 @@ HTML
 }
 
 mkdir -p "$OUT/assets"
-# Custom domain for GitHub Pages. Kept in the build so it cannot be lost.
-echo "sheets.kroki.ai" > "$OUT/CNAME"
 cp assets/icon-128.png assets/screenshot-1.png "$OUT/assets/"
 cp google*.html "$OUT/" 2>/dev/null || true
 
