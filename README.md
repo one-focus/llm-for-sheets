@@ -220,6 +220,16 @@ deployments → Install puts it on your own account, in every spreadsheet you op
 it from being rebuilt server-side, so what is checked in is what is served. Rebuild after
 editing any of the three sources.
 
+The same output is mirrored onto a domain we own, because Google's OAuth verification will
+not accept a github.io home page — that domain belongs to GitHub. After rebuilding:
+
+```bash
+rsync -a --delete --exclude build.sh --exclude CNAME docs/ ../kroki-site/public/llm-for-sheets/
+```
+
+then commit and push the `docs-hostinger` branch, which deploys to
+<https://kroki.ai/llm-for-sheets/>.
+
 ## License and policies
 
 - [MIT licence](LICENSE) — the code
