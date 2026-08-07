@@ -1,3 +1,9 @@
+---
+layout: default
+title: Terms of Service
+permalink: /terms/
+---
+
 # Terms of Service
 
 **Effective date:** 7 August 2026

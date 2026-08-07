@@ -1,5 +1,6 @@
 # clasp writes the local script id here; every developer creates their own
 .clasp.json
+.clasp.json.*
 
 node_modules/
 .DS_Store
