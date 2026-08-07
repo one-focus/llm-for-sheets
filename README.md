@@ -213,6 +213,13 @@ deployments → Install puts it on your own account, in every spreadsheet you op
 - A "convert results to values" menu item.
 - Managed keys / credits. Dropped for now: every provider is BYOK.
 
+## Website
+
+`site/` is a static build of `index.md`, `PRIVACY.md` and `TERMS.md`, produced by
+`./site/build.sh` and committed so it can be dropped on any host — GitHub Pages is not an
+option on this account, since Pages builds run on GitHub Actions and those are disabled.
+Rebuild after editing any of the three sources.
+
 ## License and policies
 
 - [MIT licence](LICENSE) — the code

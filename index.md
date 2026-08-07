@@ -43,5 +43,5 @@ ships. Nothing is hardcoded.
 MIT licensed — every claim above can be checked against four files of source.
 
 [Source code](https://github.com/one-focus/llm-for-sheets) ·
-[Privacy policy]({{ '/privacy/' | relative_url }}) ·
-[Terms of service]({{ '/terms/' | relative_url }})
+[Privacy policy](privacy/) ·
+[Terms of service](terms/)

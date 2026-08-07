@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Service — LLM for Sheets</title>
+<link rel="icon" href="../assets/icon-128.png">
+<style>
+  :root { --green:#059669; --dark:#047857; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; }
+  * { box-sizing:border-box }
+  body { margin:0; padding:0 20px 80px; color:var(--text); background:#fff;
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto }
+  header { max-width:760px; margin:0 auto; padding:28px 0 20px; border-bottom:1px solid var(--line);
+           display:flex; align-items:center; gap:12px }
+  header img { width:36px; height:36px; border-radius:8px }
+  header a { color:var(--text); text-decoration:none; font-weight:700; font-size:18px }
+  h1 { font-size:32px; line-height:1.2; margin:32px 0 12px }
+  h2 { font-size:22px; margin:36px 0 10px }
+  p, li { color:#1f2937 }
+  a { color:var(--dark) }
+  code { background:#ecfdf5; color:var(--dark); padding:2px 6px; border-radius:4px;
+         font-family:ui-monospace,Menlo,monospace; font-size:.92em }
+  pre { background:#f8fafc; border:1px solid var(--line); border-radius:8px; padding:14px 16px;
+        overflow-x:auto }
+  pre code { background:none; padding:0; color:var(--text) }
+  img { max-width:100%; border:1px solid var(--line); border-radius:10px }
+  table { border-collapse:collapse; width:100%; margin:16px 0; font-size:.94em }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top }
+  th { background:#f8fafc }
+  footer { max-width:760px; margin:56px auto 0; padding-top:20px; border-top:1px solid var(--line);
+           color:var(--muted); font-size:14px }
+  footer a { color:var(--muted) }
+</style>
+</head>
+<body>
+<header>
+  <img src="../assets/icon-128.png" alt="">
+  <a href="../">LLM for Sheets</a>
+</header>
+<main>
+<h1>Terms of Service</h1>
+<p><strong>Effective date:</strong> 7 August 2026
+<strong>Add-on:</strong> LLM for Sheets
+<strong>Maintainer:</strong> Alex Kardash — <a href="mailto:kardash.by@gmail.com">kardash.by@gmail.com</a></p>
+<h2>1. What this is</h2>
+<p>LLM for Sheets is a free, open-source Google Sheets add-on that adds an <code>=LLM()</code> formula.
+It is distributed under the <a href="LICENSE">MIT licence</a>, which governs the software itself;
+these terms govern your use of the published add-on.</p>
+<p>By installing or using the add-on, you accept these terms. If you do not accept them, do
+not install it.</p>
+<h2>2. You bring your own key</h2>
+<p>The add-on ships with no credits, no included usage, and no account. You supply an API key
+for a provider of your choosing, and you deal with that provider directly.</p>
+<p>You are responsible for:</p>
+<ul>
+<li>every charge the provider bills against your key, including charges caused by formulas
+recalculating, by regeneration, or by mistake;</li>
+<li>keeping your key confidential and revoking it if exposed;</li>
+<li>complying with that provider&#39;s terms and usage policies.</li>
+</ul>
+<p>The maintainer never sees your key, cannot see your spend, and cannot refund it.</p>
+<h2>3. Costs are yours to control</h2>
+<p>Google Sheets recalculates custom functions when a file is opened and when referenced
+cells change. The add-on caches answers so a repeat prompt is not paid for twice, and the
+sidebar can freeze answers into static values, but no cache is a guarantee. Watch your
+provider&#39;s usage dashboard, and set a spend limit there if the provider offers one.</p>
+<h2>4. The model&#39;s output</h2>
+<p>Answers come from a third-party model, not from the maintainer. They may be wrong,
+outdated, biased, or fabricated. Do not rely on them for legal, medical, financial, or
+other consequential decisions without checking them yourself. You are responsible for
+whatever you do with the output, and for the prompts you send.</p>
+<h2>5. No warranty</h2>
+<p>The add-on is provided &quot;as is&quot;, without warranty of any kind, express or implied,
+including merchantability, fitness for a particular purpose, and non-infringement. There
+is no uptime commitment, no support commitment, and no guarantee that it will keep working
+— it depends on Google Apps Script and on provider APIs, both of which can change or
+disappear without notice.</p>
+<h2>6. Limitation of liability</h2>
+<p>To the maximum extent permitted by law, the maintainer is not liable for any indirect,
+incidental, special, or consequential damages, nor for lost profits, lost data, or API
+charges, arising from the use of or inability to use the add-on — even if advised of the
+possibility. Since the add-on is free, total liability is zero.</p>
+<p>Some jurisdictions do not allow these exclusions; where that is the case, they apply only
+as far as the law permits.</p>
+<h2>7. Privacy</h2>
+<p>See <a href="PRIVACY.md">PRIVACY.md</a>. In short: the add-on has no server, and your data goes only
+to the provider you configure.</p>
+<h2>8. Changes and termination</h2>
+<p>These terms may change; the effective date above will be updated and the change recorded
+in the repository history. Continued use after a change means acceptance. You may stop
+using the add-on at any time by uninstalling it. The maintainer may stop publishing or
+maintaining it at any time — the source stays available under the MIT licence, so anyone
+can keep running their own copy.</p>
+<h2>9. Contact</h2>
+<p><a href="mailto:kardash.by@gmail.com">kardash.by@gmail.com</a></p>
+</main>
+<footer>
+  <a href="../">Home</a> ·
+  <a href="../privacy/">Privacy</a> ·
+  <a href="../terms/">Terms</a> ·
+  <a href="https://github.com/one-focus/llm-for-sheets">Source</a>
+</footer>
+</body>
+</html>
