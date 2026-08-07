@@ -1,0 +1,850 @@
+<!doctype html>
+<html>
+  <head>
+    <base target="_top" />
+    <style>
+      :root {
+        --primary: #059669;
+        --primary-dark: #047857;
+        --primary-light: #ecfdf5;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --danger: #dc2626;
+        --radius: 6px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 8px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13px;
+        line-height: 1.35;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Cards & Layout */
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 6px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 10px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 700;
+        font-size: 12px;
+        background: #f1f5f9;
+        color: var(--text);
+      }
+
+      .card-body { padding: 8px 10px; }
+
+      /* Compact Banner */
+      /* Functions section */
+      .usage + .usage { border-top: 1px solid var(--border); }
+
+      .usage-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        cursor: pointer;
+        user-select: none;
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .usage-head:hover { background: var(--bg); }
+      .usage .chev { transition: transform 0.15s; }
+      .usage.closed .chev { transform: rotate(-90deg); }
+      .usage.closed .usage-body { display: none; }
+      .usage-body { padding: 0 10px 10px; }
+
+      .usage-text { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+
+      .args {
+        margin: 0 0 8px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 2px 8px;
+        font-size: 11.5px;
+      }
+
+      .args dt {
+        font-family: ui-monospace, Menlo, monospace;
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      .args dd { margin: 0; color: var(--muted); }
+
+      .example + .example { margin-top: 6px; }
+
+      .example {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 6px 8px;
+      }
+
+      .example-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .copy {
+        flex: 0 0 auto;
+        width: 20px;
+        height: 18px;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1;
+      }
+
+      .copy:hover:not([disabled]) { background: transparent; color: var(--primary); }
+
+      .example-code {
+        display: block;
+        background: none;
+        padding: 0;
+        color: var(--primary-dark);
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 11.5px;
+        font-weight: 500;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      /* Fields & Inputs */
+      .field { margin-bottom: 6px; }
+      .field:last-child { margin-bottom: 0; }
+
+      label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: #fff;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+      }
+
+      textarea { height: 50px; resize: vertical; }
+
+      /* Buttons */
+      .row {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      button {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        border-radius: var(--radius);
+        border: 1px solid transparent;
+        background: var(--primary);
+        color: #fff;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover:not([disabled]) { background: var(--primary-dark); }
+      button:active:not([disabled]) { transform: translateY(1px); }
+
+      button.ghost {
+        background: #fff;
+        color: var(--text);
+        border-color: var(--border);
+      }
+
+      button.ghost:hover:not([disabled]) {
+        background: var(--bg);
+        border-color: #cbd5e1;
+      }
+
+      button[disabled] { opacity: 0.5; cursor: default; }
+
+      .icon-btn {
+        flex: 0 0 auto;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .icon-btn:hover:not([disabled]) { color: var(--primary); }
+
+      /* Dropdown menu — floats over the cards below instead of pushing them down */
+      .menu-wrap {
+        position: relative;
+        flex: 1;
+        display: flex;
+      }
+
+      .menu-wrap > button { width: 100%; }
+
+      .chev {
+        margin-left: 5px;
+        font-size: 10px;
+        transition: transform 0.15s;
+      }
+
+      .menu-wrap.open .chev { transform: rotate(180deg); }
+
+      .menu {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        z-index: 20;
+        background: var(--primary-light);
+        border: 1px solid #a7f3d0;
+        border-radius: var(--radius);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+      }
+
+      .menu-item {
+        flex: none;
+        display: block;
+        width: 100%;
+        padding: 9px 12px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--primary-dark);
+        text-align: left;
+        font-weight: 700;
+      }
+
+      .menu-item + .menu-item { border-top: 1px solid #a7f3d0; }
+      .menu-item:hover:not([disabled]) { background: #d1fae5; }
+
+      /* Compact Stats */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+
+      .stat-card {
+        position: relative;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 4px;
+        text-align: center;
+      }
+
+      .stat-refresh {
+        position: absolute;
+        top: 1px;
+        right: 2px;
+        flex: none;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .stat-refresh:hover:not([disabled]) {
+        background: transparent;
+        color: var(--primary);
+      }
+
+      .stat-card .val {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      .stat-card .val.bad { color: var(--danger); }
+
+      .stat-card .lbl {
+        font-size: 9px;
+        color: var(--muted);
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+
+      /* Misc */
+      .hint {
+        margin-top: 3px;
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: none; /* labels uppercase their contents; hints must not inherit it */
+        font-weight: 400;
+      }
+
+
+      .key-status {
+        font-weight: 600;
+        text-transform: none;
+        color: var(--primary-dark);
+      }
+
+      a { color: var(--primary-dark); text-decoration: none; font-weight: 600; }
+      a:hover { text-decoration: underline; }
+
+      details {
+        margin-top: 6px;
+        border-top: 1px dashed var(--border);
+        padding-top: 4px;
+      }
+
+      summary {
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        user-select: none;
+      }
+
+      summary { list-style: none; }
+      summary::-webkit-details-marker { display: none; }
+      summary::before { content: '▸ '; }
+      details[open] summary::before { content: '▾ '; }
+
+      code {
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      #status {
+        margin-top: 6px;
+        padding: 6px 8px;
+        border-radius: var(--radius);
+        font-size: 11px;
+        display: none;
+      }
+
+      #status:not(:empty) { display: block; }
+      #status.error { background: #fef2f2; color: var(--danger); border: 1px solid #fca5a5; }
+      #status.ok { background: var(--primary-light); color: var(--primary-dark); border: 1px solid #a7f3d0; }
+
+      .hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <!-- Hint Banner -->
+    <!-- Functions -->
+    <div class="card">
+      <div class="card-head">Functions</div>
+      <div class="usage closed">
+        <div class="usage-head">LLM("prompt", CELL, "model") <span class="chev">⌄</span></div>
+        <div class="usage-body">
+          <div class="usage-text">Asks the model and writes the answer into the cell.</div>
+          <dl class="args">
+            <dt>prompt</dt>
+            <dd>the question, or an instruction</dd>
+            <dt>CELL</dt>
+            <dd>optional — data appended under the instruction</dd>
+            <dt>"model"</dt>
+            <dd>optional — a different model, this cell only</dd>
+          </dl>
+
+          <div class="example">
+            <div class="example-head">
+              Question
+              <button class="copy" data-copy='=LLM("Write a tagline for an ice cream shop")'>⧉</button>
+            </div>
+            <code class="example-code">=LLM("Write a tagline for an ice cream shop")</code>
+          </div>
+
+          <div class="example">
+            <div class="example-head">
+              Instruction + cell
+              <button class="copy" data-copy='=LLM("Translate to German:", A2)'>⧉</button>
+            </div>
+            <code class="example-code">=LLM("Translate to German:", A2)</code>
+          </div>
+
+          <div class="example">
+            <div class="example-head">
+              Own model
+              <button class="copy" data-copy='=LLM("Summarise in 5 words:", A2, "gemini-3.6-flash")'>⧉</button>
+            </div>
+            <code class="example-code">=LLM("Summarise in 5 words:", A2, "gemini-3.6-flash")</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model Settings -->
+    <div class="card">
+      <div class="card-head" id="modelHead">Model Settings <span class="chev">⌄</span></div>
+      <div class="card-body" id="modelBody">
+        <div class="field">
+          <label for="provider">Provider</label>
+          <select id="provider"></select>
+        </div>
+
+        <div class="field">
+          <label for="apiKey">
+            API key <span id="keyState" class="key-status"></span>
+          </label>
+          <input id="apiKey" type="text" spellcheck="false" placeholder="Paste your key" />
+        </div>
+
+        <div id="baseRow" class="field hidden">
+          <label for="baseUrl">Base URL</label>
+          <input id="baseUrl" placeholder="https://api.deepseek.com/v1" />
+        </div>
+
+        <div class="field">
+          <label for="model">Model</label>
+          <select id="model"></select>
+          <input id="modelText" class="hidden" placeholder="Model ID" />
+          <div class="hint">
+            <span id="modelCount"></span>
+            <a id="reload" href="#">Reload</a> · <a id="catalog" href="#" target="_blank">Catalog →</a>
+          </div>
+        </div>
+
+        <details id="advanced">
+          <summary>Advanced</summary>
+          <div style="margin-top: 6px;">
+            <div class="field">
+              <label for="thinking">Thinking level</label>
+              <select id="thinking"></select>
+            </div>
+            <div class="field">
+              <label for="system">System prompt</label>
+              <textarea id="system" placeholder="Your instruction, added to every formula"></textarea>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Formulas Overview -->
+    <div class="card">
+      <div class="card-head">
+        Formulas Overview
+        <button id="rescan" class="icon-btn" title="Rescan sheet">↻</button>
+      </div>
+      <div class="card-body">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <button id="regenSheet" class="stat-refresh" title="Regenerate every LLM formula in this sheet">↻</button>
+            <span class="val" id="total">–</span>
+            <span class="lbl">In Sheet</span>
+          </div>
+          <div class="stat-card">
+            <button id="regenSel" class="stat-refresh" title="Regenerate the selected LLM formulas">↻</button>
+            <span class="val" id="selected">–</span>
+            <span class="lbl">Selected</span>
+          </div>
+          <div class="stat-card">
+            <button id="retry" class="stat-refresh" title="Re-run the cells that returned an error">↻</button>
+            <span class="val" id="errors">–</span>
+            <span class="lbl">Errors</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div id="replaceWrap" class="menu-wrap">
+            <button id="replace">Replace formulas <span class="chev">⌄</span></button>
+            <div id="replaceMenu" class="menu hidden">
+              <button id="freezeSel" class="menu-item">In selection</button>
+              <button id="freezeAll" class="menu-item">In sheet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Output -->
+    <div id="status"></div>
+
+    <script>
+      var CATALOGS = {
+        openrouter: 'https://openrouter.ai/models',
+        openai: 'https://platform.openai.com/docs/models',
+        anthropic: 'https://docs.claude.com/en/docs/about-claude/models/overview',
+        google: 'https://ai.google.dev/gemini-api/docs/models',
+        custom: '',
+      };
+      var el = function (id) {
+        return document.getElementById(id);
+      };
+      var current = null;
+      // The field shows a mask of the stored key, so its contents are only a
+      // real key once the user has typed into it.
+      var keyDirty = false;
+      var statusTimer = null;
+
+      function say(text, kind, fade) {
+        el('status').textContent = text;
+        el('status').className = kind || '';
+        clearTimeout(statusTimer);
+        if (fade) statusTimer = setTimeout(function () { say(''); }, 2500);
+      }
+
+      function busy(on) {
+        var buttons = document.getElementsByTagName('button');
+        for (var i = 0; i < buttons.length; i++) buttons[i].disabled = on;
+      }
+
+      // ---------------------------------------------------------- settings
+
+      function render(settings) {
+        current = settings;
+        el('provider').innerHTML = settings.providers
+          .map(function (p) {
+            return '<option value="' + p.id + '">' + p.label + '</option>';
+          })
+          .join('');
+        el('provider').value = settings.provider;
+        el('thinking').innerHTML = settings.thinkingLevels
+          .map(function (level) {
+            return '<option value="' + level + '">' + level.charAt(0).toUpperCase() + level.slice(1) + '</option>';
+          })
+          .join('');
+        el('thinking').value = settings.thinking;
+        el('system').value = settings.system;
+        el('baseUrl').value = settings.baseUrl;
+        showKey();
+        // Chrome restores <details> state on reload; advanced settings start shut.
+        el('advanced').open = false;
+        showModelCard(settings.modelOpen);
+        onProviderChange();
+      }
+
+      /** Collapsed state lives in settings, so it survives reopening the sidebar. */
+      function showModelCard(open) {
+        el('modelBody').classList.toggle('hidden', !open);
+        el('modelHead').classList.toggle('closed', !open);
+      }
+
+      function modelOpen() {
+        return !el('modelBody').classList.contains('hidden');
+      }
+
+      /** Never shows the key itself — the server only ever sends a mask. */
+      function showKey() {
+        keyDirty = false;
+        var mask = current.maskedKeys[el('provider').value] || '';
+        el('apiKey').value = mask;
+        el('keyState').textContent = mask ? '• Saved' : '';
+      }
+
+      /** Empty means "keep what is stored"; the mask must never be sent back. */
+      function typedKey() {
+        return keyDirty ? el('apiKey').value : '';
+      }
+
+      function onProviderChange() {
+        var provider = el('provider').value;
+        el('baseRow').classList.toggle('hidden', provider !== 'custom');
+        el('catalog').href = CATALOGS[provider] || '#';
+        el('catalog').classList.toggle('hidden', !CATALOGS[provider]);
+        showKey();
+        loadModels(false);
+      }
+
+      function payload() {
+        return {
+          provider: el('provider').value,
+          model: modelValue(),
+          thinking: el('thinking').value,
+          system: el('system').value,
+          baseUrl: el('baseUrl').value,
+          apiKey: typedKey(),
+          modelOpen: modelOpen(),
+        };
+      }
+
+      /** Autosave: every control writes on change, so there is no Save button. */
+      function autosave(message) {
+        google.script.run
+          .withSuccessHandler(function (settings) {
+            current = settings;
+            showKey();
+            say(message || 'Saved', 'ok', true);
+          })
+          .withFailureHandler(function (error) {
+            say(error.message || String(error), 'error');
+          })
+          .saveSettings(payload());
+      }
+
+      // ------------------------------------------------------------ models
+
+      function savedModel() {
+        return el('provider').value === current.provider ? current.model : '';
+      }
+
+      function showModels(models) {
+        var saved = savedModel();
+        if (saved && models.indexOf(saved) < 0) models = [saved].concat(models);
+        el('model').innerHTML = ['<option value="">— Select Model —</option>']
+          .concat(
+            models.map(function (m) {
+              return '<option value="' + m + '">' + m + '</option>';
+            }),
+          )
+          .join('');
+        el('model').value = saved || '';
+        el('model').classList.remove('hidden');
+        el('modelText').classList.add('hidden');
+      }
+
+      function showModelText() {
+        el('modelText').value = savedModel();
+        el('modelText').classList.remove('hidden');
+        el('model').classList.add('hidden');
+      }
+
+      function modelValue() {
+        return el('model').classList.contains('hidden') ? el('modelText').value : el('model').value;
+      }
+
+      function loadModels(refresh) {
+        var provider = el('provider').value;
+        if (provider === 'custom' && !el('baseUrl').value.trim()) {
+          el('modelCount').textContent = '';
+          showModelText();
+          return;
+        }
+        el('modelCount').textContent = 'Loading… ';
+        google.script.run
+          .withSuccessHandler(function (models) {
+            showModels(models);
+            el('modelCount').textContent = models.length + ' models · ';
+          })
+          .withFailureHandler(function (error) {
+            el('modelCount').textContent = '';
+            showModelText();
+            say(error.message || String(error), 'error');
+          })
+          .listModels({
+            provider: provider,
+            apiKey: typedKey(),
+          modelOpen: modelOpen(),
+            baseUrl: el('baseUrl').value,
+            refresh: !!refresh,
+          });
+      }
+
+      // ----------------------------------------------------------- actions
+
+      /** Cells run one at a time; a long sheet can outlast the script budget. */
+      function ran(result) {
+        var text = 'Regenerated ' + result.count + ' cells.';
+        return result.left ? text + ' ' + result.left + ' left — run again.' : text;
+      }
+
+      function scan() {
+        google.script.run
+          .withSuccessHandler(function (counts) {
+            el('total').textContent = counts.total;
+            el('selected').textContent = counts.selected;
+            el('errors').textContent = counts.errors;
+            el('errors').className = counts.errors ? 'val bad' : 'val';
+          })
+          .withFailureHandler(function () {})
+          .scanFormulas();
+      }
+
+      function act(name, arg, done) {
+        busy(true);
+        say('Working…');
+        google.script.run
+          .withSuccessHandler(function (result) {
+            busy(false);
+            say(done(result), 'ok');
+            scan();
+          })
+          .withFailureHandler(function (error) {
+            busy(false);
+            say(error.message || String(error), 'error');
+          })
+          [name](arg);
+      }
+
+      var usageHeads = document.getElementsByClassName('usage-head');
+      for (var u = 0; u < usageHeads.length; u++) {
+        usageHeads[u].addEventListener('click', function (event) {
+          event.currentTarget.parentNode.classList.toggle('closed');
+        });
+      }
+
+      // execCommand, not the clipboard API: the sidebar runs in a sandboxed
+      // googleusercontent iframe where clipboard permission is not granted.
+      var copyButtons = document.getElementsByClassName('copy');
+      for (var b = 0; b < copyButtons.length; b++) {
+        copyButtons[b].addEventListener('click', function (event) {
+          event.stopPropagation();
+          var area = document.createElement('textarea');
+          area.value = event.currentTarget.getAttribute('data-copy');
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          var ok = false;
+          try {
+            ok = document.execCommand('copy');
+          } catch (e) {
+            ok = false;
+          }
+          document.body.removeChild(area);
+          say(ok ? 'Copied.' : 'Copy failed — select the text by hand.', ok ? 'ok' : 'error', ok);
+        });
+      }
+
+      el('modelHead').addEventListener('click', function () {
+        showModelCard(!modelOpen());
+        autosave('');
+      });
+      el('provider').addEventListener('change', function () {
+        onProviderChange();
+        autosave('Provider saved');
+      });
+      el('baseUrl').addEventListener('change', function () {
+        autosave();
+        loadModels(true);
+      });
+      ['model', 'modelText', 'thinking', 'system'].forEach(function (id) {
+        el(id).addEventListener('change', function () {
+          autosave();
+        });
+      });
+      // Focus clears the mask so a new key can be pasted; leaving it untouched
+      // puts the mask straight back.
+      el('apiKey').addEventListener('focus', function () {
+        if (!keyDirty) el('apiKey').value = '';
+      });
+      el('apiKey').addEventListener('input', function () {
+        keyDirty = true;
+      });
+      el('apiKey').addEventListener('change', function () {
+        if (!keyDirty) return showKey();
+        autosave('Key saved');
+        loadModels(true);
+      });
+      el('apiKey').addEventListener('blur', function () {
+        if (!keyDirty && !el('apiKey').value) showKey();
+      });
+      el('reload').addEventListener('click', function (event) {
+        event.preventDefault();
+        loadModels(true);
+      });
+      el('rescan').addEventListener('click', scan);
+      el('regenSheet').addEventListener('click', function () {
+        act('regenerate', 'sheet', function (result) {
+          return result.count ? ran(result) : 'No LLM formulas in this sheet.';
+        });
+      });
+      el('regenSel').addEventListener('click', function () {
+        act('regenerate', 'selection', function (result) {
+          return result.count ? ran(result) : 'No LLM formulas selected.';
+        });
+      });
+      function closeMenu() {
+        el('replaceMenu').classList.add('hidden');
+        el('replaceWrap').classList.remove('open');
+      }
+
+      el('replace').addEventListener('click', function (event) {
+        event.stopPropagation();
+        var open = el('replaceMenu').classList.toggle('hidden');
+        el('replaceWrap').classList.toggle('open', !open);
+      });
+      document.addEventListener('click', closeMenu);
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+      });
+      el('retry').addEventListener('click', function () {
+        act('retryErrors', null, function (result) {
+          return result.count ? ran(result) : 'No errors to retry.';
+        });
+      });
+      function freeze(scope) {
+        closeMenu();
+        act('replaceFormulas', scope, function (result) {
+          return result.count ? 'Froze ' + result.count + ' cells.' : 'Nothing to freeze.';
+        });
+      }
+      el('freezeSel').addEventListener('click', function () {
+        freeze('selection');
+      });
+      el('freezeAll').addEventListener('click', function () {
+        freeze('sheet');
+      });
+
+      google.script.run
+        .withSuccessHandler(function (settings) {
+          render(settings);
+          scan();
+        })
+        .withFailureHandler(function (error) {
+          say(error.message || String(error), 'error');
+        })
+        .getSettings();
+    </script>
+  </body>
+</html>
