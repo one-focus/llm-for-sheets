@@ -2,3 +2,4 @@ title: LLM for Sheets
 description: Any LLM in a Google Sheets cell. Bring your own key.
 theme: jekyll-theme-cayman
 exclude: [assets/build.sh, selfcheck.js, Code.gs, Providers.gs, Sidebar.html, appsscript.json, .claspignore]
+include: [googlef8ef3ad4be81e33f.html]
