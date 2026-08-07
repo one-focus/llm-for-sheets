@@ -32,3 +32,18 @@ done
 
 echo "banner:"
 render banner.svg 220 140 "banner-220x140.png"
+
+# A blank canvas at the recommended screenshot size, so the slot exists before
+# the real capture does. Never overwrites: a finished screenshot lives here.
+echo "screenshot placeholder:"
+if [ -e screenshot-1.png ]; then
+  echo "  screenshot-1.png  kept, already exists"
+else
+  cat > /tmp/llm-blank.html <<'HTML'
+<!doctype html><meta charset="utf-8"><style>html,body{margin:0;padding:0;background:#fff}</style>
+HTML
+  "$CHROME" --headless --disable-gpu --hide-scrollbars \
+    --screenshot="screenshot-1.png" --window-size=1280,800 /tmp/llm-blank.html 2>/dev/null
+  rm -f /tmp/llm-blank.html
+  echo "  screenshot-1.png  1280x800"
+fi
