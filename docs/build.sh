@@ -1,14 +1,14 @@
 #!/bin/bash
 # Renders the markdown sources into a static site under site/.
 #
-# GitHub Pages is unavailable on this account (Actions disabled, and Pages
-# builds run on that infrastructure), so the output is committed and can be
-# dropped on any static host — Cloudflare Pages, Netlify, Hostinger, S3.
+# The output is committed and served by GitHub Pages straight from docs/ — no
+# Jekyll (see .nojekyll), so what is checked in is exactly what is served. Any
+# other static host can take the same folder.
 #
-#   ./site/build.sh
+#   ./docs/build.sh
 set -e
 cd "$(dirname "$0")/.."
-OUT=site
+OUT=docs
 
 page() { # source.md  out-dir  title
   local src="$1" dir="$2" title="$3"
