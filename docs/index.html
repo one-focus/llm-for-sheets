@@ -39,34 +39,51 @@
   <a href="">LLM for Sheets</a>
 </header>
 <main>
-<p>Ask any language model straight from a spreadsheet cell:</p>
+<h1>LLM for Sheets</h1>
+<p><strong>LLM for Sheets is a Google Sheets add-on.</strong> It adds one spreadsheet formula, <code>=LLM()</code>, so
+you can ask an AI model a question from inside a cell and get the answer written into that
+cell.</p>
+<p>It is for anyone who already works in Google Sheets and wants a model to handle a column of
+repetitive text work — translating, summarising, classifying, rewriting, extracting fields —
+without exporting the data anywhere or copying answers back by hand.</p>
 <pre><code>=LLM(&quot;Write a tagline for an ice cream shop&quot;)
 =LLM(&quot;Translate to German:&quot;, A2)
 =LLM(&quot;Summarise in 5 words:&quot;, A2, &quot;gemini-3.6-flash&quot;)
 </code></pre>
-<p><img src="assets/screenshot-1.png" alt="The add-on running in Google Sheets"></p>
+<p><img src="assets/screenshot-1.png" alt="LLM for Sheets running in Google Sheets"></p>
+<h2>How the add-on uses your Google account data</h2>
+<ul>
+<li><strong>It reads the spreadsheet you have open.</strong> The formulas and the cells they reference are
+read so the prompt can be assembled, and the model&#39;s answer is written back into the
+cell. The add-on requests <code>spreadsheets.currentonly</code>, so it can only touch the file
+currently open — never anything else in your Google Drive.</li>
+<li><strong>It shows a sidebar</strong> inside Google Sheets where you choose a provider, store your API
+key, and pick a model.</li>
+<li><strong>It sends your prompt to the AI provider you chose</strong> — OpenRouter, OpenAI, Anthropic,
+Google AI, or any OpenAI-compatible endpoint — authenticated with your own API key.</li>
+<li><strong>Nothing is sent to the developer.</strong> LLM for Sheets has no server, no analytics, and no
+account system. Your API key is stored in your own Apps Script user properties and is
+never transmitted anywhere except to the provider you configured.</li>
+</ul>
+<p>Full details are in the <a href="privacy/">privacy policy</a>.</p>
 <h2>Bring your own key</h2>
-<p>No subscription, no credits, no account. Connect <strong>OpenRouter</strong>, <strong>OpenAI</strong>, <strong>Anthropic</strong>,
-<strong>Google AI</strong>, or any OpenAI-compatible endpoint, and pay that provider directly at cost.</p>
-<p>The add-on has no server. It runs entirely inside your Google account and talks only to the
-provider you configure. Your API key is stored in your own script properties and is never
-sent anywhere else — the developer has no way to read it.</p>
-<h2>It does not re-bill you</h2>
+<p>There is no subscription and no credits. You connect your own provider account and pay that
+provider directly at cost.</p>
+<h2>It does not bill you twice</h2>
 <p>Google Sheets recalculates formulas when a file is opened, when rows are added, when a
-column is sorted. Every answer is cached permanently against its document, so none of that
-costs a second request.</p>
-<p>When you <em>do</em> want a fresh answer, one click regenerates the whole sheet, the current
-selection, or only the cells that errored. Dependent formulas wait their turn instead of
-burning credits on half-built prompts, and finished answers can be frozen into plain text
-before you share the file.</p>
+column is sorted. Every answer is cached against its document, so none of that costs a
+second request. When you do want a fresh answer, one click regenerates the whole sheet, the
+current selection, or only the cells that returned an error.</p>
 <h2>The model list is live</h2>
-<p>Models are fetched from your provider&#39;s own catalogue, so a new one appears the day it
-ships. Nothing is hardcoded.</p>
+<p>Models are fetched from your provider&#39;s own catalogue, so a new one becomes available the
+day the provider ships it. Nothing is hardcoded in the add-on.</p>
 <h2>Open source</h2>
-<p>MIT licensed — every claim above can be checked against four files of source.</p>
+<p>LLM for Sheets is MIT licensed. Every statement on this page can be checked against the
+source, which is four files long.</p>
 <p><a href="https://github.com/one-focus/llm-for-sheets">Source code</a> ·
 <a href="privacy/">Privacy policy</a> ·
 <a href="terms/">Terms of service</a></p>
+<p>Contact: <a href="mailto:kardash.by@gmail.com">kardash.by@gmail.com</a></p>
 </main>
 <footer>
   <a href="">Home</a> ·
