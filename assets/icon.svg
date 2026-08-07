@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981" />
+      <stop offset="1" stop-color="#047857" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)" />
+  <!-- Three cells of a grid; the fourth is answered by the model. -->
+  <g fill="#ffffff">
+    <rect x="26" y="26" width="34" height="34" rx="7" />
+    <rect x="68" y="26" width="34" height="34" rx="7" />
+    <rect x="26" y="68" width="34" height="34" rx="7" />
+    <path
+      d="M85 62 L91.5 78.5 L108 85 L91.5 91.5 L85 108 L78.5 91.5 L62 85 L78.5 78.5 Z"
+      fill="#ffffff" />
+  </g>
+</svg>
