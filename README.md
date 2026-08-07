@@ -172,17 +172,34 @@ node selfcheck.js
 
 The same assertions run inside Apps Script: pick `llmSelfCheck` in the editor and hit Run.
 
-## Publishing
+## Publishing to the Google Workspace Marketplace
 
-`clasp create --type sheets` gives a container-bound project, which is the fastest way to
-test but cannot be published: "An Editor add-on is a standalone Apps Script project", and
-publishing also needs a standard Google Cloud project attached. So move to a standalone
-project before shipping, then Deploy → Test deployments to install it into any spreadsheet.
+Editor add-ons ship through the Marketplace only — the Chrome Web Store path is retired.
+The script project must be **standalone**: "An Editor add-on is a standalone Apps Script
+project". A container-bound project is the fastest way to develop but cannot be published.
 
-Editor add-ons go to the Google Workspace Marketplace only (the Chrome Web Store path is
-retired). Public listings get an app review; private domain-only and unlisted publishing
-skip it. None of the three scopes in the manifest are sensitive or restricted, so no
-security assessment is required.
+1. **Attach a standard Cloud project.** Apps Script → Project Settings → Google Cloud
+   Platform project → Change project. The default per-script project cannot be used for
+   publishing.
+2. **Configure the OAuth consent screen** in that Cloud project: External, app name,
+   support email, logo, and public URLs for the privacy policy and terms. GitHub Pages is
+   enough to host both.
+3. **Enable the Google Workspace Marketplace SDK** — APIs & Services → Library.
+4. **Deploy.** Apps Script → Deploy → New deployment → type **Add-on**. Note the version
+   number; every listing update needs a new one.
+5. **App Configuration** in the Marketplace SDK: visibility, the Sheets add-on extension,
+   the script ID and deployment version, and the OAuth scopes from `appsscript.json`.
+6. **Store Listing**: name, description, category, icons and at least one 1280×800
+   screenshot, plus the support and privacy URLs.
+7. **Submit for review.**
+
+None of the three scopes in `appsscript.json` are sensitive or restricted
+(`script.external_request`, `script.container.ui`, `spreadsheets.currentonly`), so no
+security assessment is required — only the ordinary brand and app review.
+
+Private (single domain) and unlisted publishing skip the review entirely and are the
+fastest way to hand the add-on to real users. Before any of that, Deploy → Test
+deployments → Install puts it on your own account, in every spreadsheet you open.
 
 ## Not built yet
 
