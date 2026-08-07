@@ -1,0 +1,10 @@
+# clasp pushes every .js it finds. selfcheck.js is a node script — its
+# top-level require() would throw on every Apps Script execution and take the
+# whole project down with it.
+selfcheck.js
+README.md
+LICENSE
+.gitignore
+.claspignore
+node_modules/**
+.git/**
