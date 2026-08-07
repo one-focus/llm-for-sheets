@@ -99,7 +99,7 @@ turning a paid-for answer into an error.
 
 The key is an MD5 of provider, model, thinking level, system prompt and the resolved
 prompt text, so editing any of them produces a new entry and leaves the old one behind.
-The store travels with the file: a copy of the spreadsheet carries its answers along.
+The store belongs to the document, inside the user's own Google account.
 
 ## Writing formulas through the Sheets API
 
@@ -182,8 +182,10 @@ project". A container-bound project is the fastest way to develop but cannot be 
    Platform project → Change project. The default per-script project cannot be used for
    publishing.
 2. **Configure the OAuth consent screen** in that Cloud project: External, app name,
-   support email, logo, and public URLs for the privacy policy and terms. GitHub Pages is
-   enough to host both.
+   support email, logo, and public URLs for the privacy policy and terms — this repository
+   ships both, so the raw file URLs work:
+   `https://github.com/one-focus/llm-for-sheets/blob/main/PRIVACY.md` and
+   `.../TERMS.md`. Enable GitHub Pages if you prefer a rendered page on your own domain.
 3. **Enable the Google Workspace Marketplace SDK** — APIs & Services → Library.
 4. **Deploy.** Apps Script → Deploy → New deployment → type **Add-on**. Note the version
    number; every listing update needs a new one.
@@ -208,6 +210,8 @@ deployments → Install puts it on your own account, in every spreadsheet you op
 - A "convert results to values" menu item.
 - Managed keys / credits. Dropped for now: every provider is BYOK.
 
-## License
+## License and policies
 
-MIT — see [LICENSE](LICENSE).
+- [MIT licence](LICENSE) — the code
+- [Privacy policy](PRIVACY.md) — no server, no telemetry; prompts go only to the provider you configure
+- [Terms of service](TERMS.md) — bring your own key, no warranty
