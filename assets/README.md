@@ -15,15 +15,15 @@ there.
 | ----------------- | ------------------------------- | -------- | ----------------------- |
 | Application icon  | 32×32, 48×48, 96×96, 128×128    | ready    | `icon-*.png`            |
 | Card banner       | 220×140                         | ready    | `banner-220x140.png`    |
-| Screenshots       | 1280×800 (or 640×400 / 2560×1600) | **todo** | `screenshot-1.png`, blank |
+| Screenshot        | 1280×800                        | ready    | `screenshot-1.png`      |
 
 At least one screenshot is required, ten at most. They must be full bleed — square corners,
 no padding, no mockup frame — and must show the add-on working inside Google Sheets.
 
 ## Taking the screenshots
 
-`screenshot-1.png` is a blank canvas at the right size, waiting to be replaced —
-`build.sh` never overwrites it once it holds something. Duplicate it for further shots.
+`build.sh` writes a blank canvas at the right size only when the file is missing, so the
+capture below survives every later run. Duplicate it if you ever want more shots.
 
 They cannot be generated: a listing screenshot has to be a real capture of the add-on
 running in a spreadsheet. On macOS, capture a 1280×800 region and a Retina display gives
